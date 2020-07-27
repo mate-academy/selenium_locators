@@ -10,6 +10,9 @@ https://the-internet.herokuapp.com/challenging_dom#delete
 from time import sleep
 
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 driver = webdriver.Chrome(executable_path="c:/selenium/chromedriver.exe")
 driver.set_window_size(1920, 1080)
@@ -36,23 +39,26 @@ assert driver.find_element_by_css_selector('#userForm div:nth-child(6) > div > p
            1] == 'Kiev Sechenova 10'
 
 driver.get("https://testpages.herokuapp.com/styled/basic-ajax-test.html")
-elements = driver.find_elements_by_css_selector('form div:nth-child(1) > select[id=\'combo1\'] > option')
+elements = driver.find_elements_by_css_selector('form div:nth-child(1) > select > option')
 for element in elements:
     if element.text == 'Desktop':
-        element.click();
-        sleep(3)
+        backButtonCss = "body > div > div[class=\'centered form-results\'] > div[class=\'form-label\'] > a";
+        element.click()
         button = driver.find_element_by_css_selector('form  > input[value=\'Code In It\']')
-        button.click();
+        button.click()
+        sleep(5)
+        driver.find_element_by_css_selector(backButtonCss).click()
         break;
 
+sleep(5)
 driver.get("https://the-internet.herokuapp.com/challenging_dom#delete")
 table = driver.find_elements_by_css_selector('table > tbody > tr');
 for row in table:
-   cells = row.find_elements_by_css_selector('td');
-   i = 0;
-   for cell in cells:
-       if i > 2:
-           break;
-       print(cell.text + " "),
-       i += 1;
-   print ("")
+    cells = row.find_elements_by_css_selector('td');
+    i = 0;
+    for cell in cells:
+        if i > 2:
+            break;
+        print(cell.text + " "),
+        i += 1;
+    print ("")
