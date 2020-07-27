@@ -35,7 +35,7 @@ def basic_ajax_test():
     category_list = Select(browser.find_element_by_css_selector('#combo1'))
     category_list.select_by_value('2')
     sleep(5)
-    browser.find_element_by_css_selector('body > div > div.centered > form > input.styled-click-button').click()
+    browser.find_element_by_css_selector('.styled-click-button').click()
     print('=== SECOND CASE ENDED ===')
     browser.quit()
 
@@ -46,8 +46,7 @@ def basic_ajax_test():
 def challenging_dom():
     browser = webdriver.Chrome()
     browser.get("https://the-internet.herokuapp.com/challenging_dom#delete")
-    # whole_table = browser.find_element_by_xpath('//tbody')
-    table = browser.find_element_by_css_selector('#content > div > div > div > div.large-10.columns > table > tbody')
+    table = browser.find_element_by_xpath('//tbody')
     rows = table.find_elements_by_tag_name('tr')
     for row in rows:
         cols = row.find_elements_by_tag_name('td')
